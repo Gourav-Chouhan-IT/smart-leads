@@ -21,7 +21,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
       success: true,
       token,
       user: {
-        id: user._id,
+        _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role
@@ -53,7 +53,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
       success: true,
       token,
       user: {
-        id: user._id,
+        _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role
