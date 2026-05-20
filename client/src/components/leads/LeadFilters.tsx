@@ -1,6 +1,8 @@
+import type { LeadSource, LeadStatus } from '../../types/lead.types'
+
 interface FiltersType {
-  status: string
-  source: string
+  status: LeadStatus | ''
+  source: LeadSource | ''
   search: string
   sort: 'latest' | 'oldest'
 }
@@ -27,7 +29,7 @@ const LeadFilters = ({ filters, onChange, onAdd, onExport }: Props) => {
       {/* Status Filter */}
       <select
         value={filters.status}
-        onChange={(e) => onChange({ status: e.target.value })}
+        onChange={(e) => onChange({ status: e.target.value as LeadStatus | '' })}
         className="px-4 py-2.5 bg-surface border border-border rounded-md text-text focus:border-teal transition-colors cursor-pointer"
       >
         <option value="">All Statuses</option>
@@ -40,7 +42,7 @@ const LeadFilters = ({ filters, onChange, onAdd, onExport }: Props) => {
       {/* Source Filter */}
       <select
         value={filters.source}
-        onChange={(e) => onChange({ source: e.target.value })}
+        onChange={(e) => onChange({ source: e.target.value as LeadSource | '' })}
         className="px-4 py-2.5 bg-surface border border-border rounded-md text-text focus:border-teal transition-colors cursor-pointer"
       >
         <option value="">All Sources</option>
