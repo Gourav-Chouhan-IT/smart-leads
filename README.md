@@ -7,7 +7,7 @@ A full-stack lead management dashboard built with the MERN stack and TypeScript.
 - **Frontend:** https://smart-leads-gules.vercel.app/login
 - **Backend API:** https://smart-leads-r6ld.onrender.com
 - **API Docs:** https://smart-leads-r6ld.onrender.com/api-docs
-- **Demo Video:** https://drive.google.com/file/d/1LDEuEw5ApmYeJKfr-5czJMkAptIvJ44s/view?usp=drive_link
+- **Demo Video:** https://www.loom.com/share/63d3a4974b6b425fbd17c1e1dc9d562busp=drive_link
 
 ---
 
