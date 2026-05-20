@@ -35,10 +35,11 @@ app.use(errorMiddleware)
 // START SERVER
 const startServer = async () => {
   try {
-    // connect to MongoDB first, then start server
     await connectDB()
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`)
+      console.log(`Environment: ${process.env.NODE_ENV}`)
+      console.log(`MongoDB: connected`)
     })
   } catch (error) {
     console.error('Failed to start server:', error)
