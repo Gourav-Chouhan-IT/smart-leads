@@ -1,9 +1,24 @@
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
+import ProtectedRoute from './components/layout/ProtectedRoute'
 
 function App() {
   return (
-    <div className="min-h-screen bg-blue-500 flex items-center justify-center">
-      <h1 className="text-white text-4xl font-bold">ServiceHive ✅</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   )
 }
 
