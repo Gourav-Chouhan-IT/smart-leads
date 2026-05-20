@@ -26,7 +26,7 @@ A full-stack lead management dashboard built with the MERN stack and TypeScript.
 
 ## Demo Video
 
-- **Walkthrough:** https://www.loom.com/share/your-video-id
+- **Walkthrough:** https://www.loom.com/share/63d3a4974b6b425fbd17c1e1dc9d562busp=drive_link
 
 ---
 
