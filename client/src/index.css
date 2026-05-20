@@ -1,3 +1,67 @@
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,600,700,800&display=swap');
 @import "tailwindcss";
-@import "tailwindcss";
-@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg: #1A1A1A;
+  --color-surface: #242424;
+  --color-surface-2: #2A2A2A;
+  --color-border: #2E2E2E;
+  --color-text: #F0F0F0;
+  --color-text-dim: #B0B0B0;
+  --color-text-mute: #888888;
+  --color-teal: #004D61;
+  --color-teal-hover: #005F77;
+  --color-ruby: #822659;
+  --color-ruby-hover: #9D2F6B;
+  --color-green: #3E5641;
+  --color-green-hover: #4D6B51;
+  --font-sans: 'Cabinet Grotesk', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #1A1A1A;
+  color: #F0F0F0;
+  font-family: 'Cabinet Grotesk', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #004D61;
+  color: #F0F0F0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2E2E2E;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3A3A3A;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  outline: none;
+}
