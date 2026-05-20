@@ -1,21 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-
-interface Lead {
-  _id: string
-  name: string
-  email: string
-  status: 'New' | 'Contacted' | 'Qualified' | 'Lost'
-  source: 'Website' | 'Instagram' | 'Referral'
-  phone?: string
-  company?: string
-  message?: string
-  createdAt: string
-  updatedAt: string
-}
+import type { ILeadModel, LeadStatus, LeadSource } from '../types/lead.types'
 
 interface LeadState {
-  leads: Lead[]
+  leads: ILeadModel[]
   loading: boolean
   error: string | null
   pagination: {
@@ -25,8 +13,8 @@ interface LeadState {
     limit: number
   }
   filters: {
-    status: string
-    source: string
+    status: LeadStatus | ''
+    source: LeadSource | ''
     search: string
     sort: 'latest' | 'oldest'
   }
@@ -48,7 +36,7 @@ const leadSlice = createSlice({
       state.loading = true
       state.error = null
     },
-    fetchSuccess: (state, action: PayloadAction<{ data: Lead[]; pagination: any }>) => {
+    fetchSuccess: (state, action: PayloadAction<{ data: ILeadModel[]; pagination: LeadState['pagination'] }>) => {
       state.leads = action.payload.data
       state.pagination = action.payload.pagination
       state.loading = false
@@ -69,4 +57,4 @@ const leadSlice = createSlice({
 
 export const { fetchStart, fetchSuccess, fetchFailure, setFilter, setPage } = leadSlice.actions
 export default leadSlice.reducer
-export type { Lead }
+export type { ILeadModel as Lead }

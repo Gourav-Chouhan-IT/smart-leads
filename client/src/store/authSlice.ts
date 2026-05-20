@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import type { IAuthState } from '../types/auth.types'
+import type { IAuthState, IUserModel } from '../types/auth.types'
 
 const tokenFromStorage = localStorage.getItem('token')
 const userFromStorage = localStorage.getItem('user')
@@ -21,7 +21,7 @@ const authSlice = createSlice({
       state.loading = true
       state.error = null
     },
-    loginSuccess: (state, action: PayloadAction<{ user: any; token: string }>) => {
+    loginSuccess: (state, action: PayloadAction<{ user: Omit<IUserModel, 'password'>; token: string }>) => {
       state.user = action.payload.user
       state.token = action.payload.token
       state.isAuthenticated = true

@@ -1,6 +1,9 @@
 import mongoose from 'mongoose'
+import type { HydratedDocument } from 'mongoose'
 import bcrypt from 'bcryptjs'
 import { IUser } from '../types/auth.types'
+
+export type UserDocument = HydratedDocument<IUser>
 
 const UserSchema = new mongoose.Schema<IUser>({
   name:     { type: String, required: true },

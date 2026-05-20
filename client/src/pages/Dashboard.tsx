@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../store/store'
 import { fetchStart, fetchSuccess, fetchFailure, setFilter, setPage } from '../store/leadSlice'
+import axios from 'axios'
 import { leadService } from '../services/leadService'
+import type { GetLeadsParams } from '../services/leadService'
 import { useDebounce } from '../hooks/useDebounce'
 import { exportToCSV } from '../utils/exportCSV'
 import Navbar from '../components/layout/Navbar'
@@ -26,7 +28,7 @@ const Dashboard = () => {
   const fetchLeads = async () => {
     dispatch(fetchStart())
     try {
-      const params: any = {
+      const params: GetLeadsParams = {
         page: pagination.page,
         limit: pagination.limit,
         sort: filters.sort,
@@ -37,8 +39,8 @@ const Dashboard = () => {
 
       const res = await leadService.getAll(params)
       dispatch(fetchSuccess({ data: res.data, pagination: res.pagination }))
-    } catch (err: any) {
-      dispatch(fetchFailure(err.response?.data?.message || 'Failed to fetch leads'))
+    } catch (err: unknown) {
+      dispatch(fetchFailure(axios.isAxiosError(err) ? err.response?.data?.message || 'Failed to fetch leads' : 'Failed to fetch leads'))
     }
   }
 
@@ -61,8 +63,8 @@ const Dashboard = () => {
     try {
       await leadService.delete(id)
       fetchLeads()
-    } catch (err: any) {
-      alert(err.response?.data?.message || 'Failed to delete')
+    } catch (err: unknown) {
+      alert(axios.isAxiosError(err) ? err.response?.data?.message || 'Failed to delete' : 'Failed to delete')
     }
   }
 
@@ -75,8 +77,8 @@ const Dashboard = () => {
       }
       setModalOpen(false)
       fetchLeads()
-    } catch (err: any) {
-      alert(err.response?.data?.message || 'Failed to save')
+    } catch (err: unknown) {
+      alert(axios.isAxiosError(err) ? err.response?.data?.message || 'Failed to save' : 'Failed to save')
     }
   }
 

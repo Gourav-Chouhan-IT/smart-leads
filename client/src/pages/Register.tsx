@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import axios from 'axios'
 import { authService } from '../services/authService'
 import { loginStart, loginSuccess, loginFailure } from '../store/authSlice'
 import Navbar from '../components/layout/Navbar'
@@ -40,8 +41,8 @@ const Register = () => {
       const data = await authService.register(form)
       dispatch(loginSuccess({ user: data.user, token: data.token }))
       navigate('/dashboard')
-    } catch (err: any) {
-      const message = err.response?.data?.message || 'Registration failed'
+    } catch (err: unknown) {
+      const message = axios.isAxiosError(err) ? err.response?.data?.message || 'Registration failed' : 'Registration failed'
       setError(message)
       dispatch(loginFailure(message))
     } finally {

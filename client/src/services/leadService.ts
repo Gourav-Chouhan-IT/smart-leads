@@ -1,7 +1,7 @@
 import api from './api'
 import type { ILead } from '../types/lead.types'
 
-interface GetLeadsParams {
+export interface GetLeadsParams {
   page?: number
   limit?: number
   status?: string

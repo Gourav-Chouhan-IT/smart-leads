@@ -1,5 +1,8 @@
 import mongoose from 'mongoose'
+import type { HydratedDocument } from 'mongoose'
 import { ILead } from '../types/lead.types'
+
+export type LeadDocument = HydratedDocument<ILead>
 
 const LeadSchema = new mongoose.Schema<ILead>({
   name:    { type: String, required: true, trim: true },

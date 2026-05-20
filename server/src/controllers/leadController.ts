@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import Lead from '../models/Lead'
+import type { LeadQuery, LeadStatus, LeadSource } from '../types/lead.types'
 
 // CREATE LEAD
 export const createLead = async (req: Request, res: Response, next: NextFunction) => {
@@ -25,23 +26,20 @@ export const createLead = async (req: Request, res: Response, next: NextFunction
 export const getAllLeads = async (req: Request, res: Response, next: NextFunction) => {
   try {
 
-    // extract query params from URL
-    const { status, source, search, sort, page = 1, limit = 10 } = req.query
+    // coerce query params — req.query values are string | ParsedQs | string[] | ParsedQs[]
+    const status = req.query.status ? String(req.query.status) : undefined
+    const source = req.query.source ? String(req.query.source) : undefined
+    const search = req.query.search ? String(req.query.search) : undefined
+    const sort = req.query.sort ? String(req.query.sort) : undefined
+    const pageNum = Number(req.query.page ?? 1)
+    const limitNum = Number(req.query.limit ?? 10)
 
-    // convert page and limit to numbers (they come as strings from URL)
-    const pageNum = Number(page)
-    const limitNum = Number(limit)
-
-    //sorting
-    // sort order — -1 means latest first (default), 1 means oldest first
     const sortOrder = sort === 'oldest' ? 1 : -1
 
-    //filtering
-    // start with empty query — means -> find everything
-    const query: any = {}
+    const query: LeadQuery = {}
 
-    if (status) query.status = status
-    if (source) query.source = source
+    if (status) query.status = status as LeadStatus
+    if (source) query.source = source as LeadSource
 
     // searching -> search uses regex for partial + case insensitive matching
     if (search) {

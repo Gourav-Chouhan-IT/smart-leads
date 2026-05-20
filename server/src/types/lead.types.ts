@@ -16,3 +16,12 @@ export interface ILeadModel extends ILead {
   createdAt: Date
   updatedAt: Date
 }
+
+export interface LeadQuery {
+  status?: LeadStatus
+  source?: LeadSource
+  $or?: Array<{
+    name?: { $regex: string; $options: string }
+    email?: { $regex: string; $options: string }
+  }>
+}
